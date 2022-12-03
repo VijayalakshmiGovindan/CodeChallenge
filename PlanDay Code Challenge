@@ -1,5 +1,7 @@
 
 
+package com.hcl.form.qe.nitro.runtime.apppage;
+
 import static org.testng.Assert.assertEquals;
 
 import java.time.Duration;
@@ -16,7 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class PlanDay {
 	public static void main(String[] args) throws InterruptedException {
 
-		System.setProperty("webdriver.chrome.driver","chromedriver_win32\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver","C:\\chromedriver_win32\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
@@ -34,11 +36,12 @@ public class PlanDay {
 		driver.findElement(By.xpath("//input[@id='Password']")).sendKeys("invalidpasswordtovalidateerror");
 		driver.findElement(By.xpath("//button[@id='MainLoginButton']")).click();
 		assertEquals("The username or password is incorrect.",
-				driver.findElement(By.xpath("//p[@id='Username-validation-error']")).getText());
+				driver.findElement(By.xpath("//p[@id='Username-validation-error']")).getText(), "Username error is validated");
 		assertEquals("The username or password is incorrect.",
-				driver.findElement(By.xpath("//p[@id='Password-validation-error']")).getText());
+				driver.findElement(By.xpath("//p[@id='Password-validation-error']")).getText(), "Password error is validated");
 		
 		//Valid credentials
+		driver.findElement(By.xpath("//input[@id='Username']")).clear();
 		driver.findElement(By.xpath("//input[@id='Username']")).sendKeys("plandayqa@outlook.com");
 		driver.findElement(By.xpath("//input[@id='Password']")).sendKeys("APItesting21");
 		driver.findElement(By.xpath("//button[@id='MainLoginButton']")).click();
